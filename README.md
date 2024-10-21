@@ -46,7 +46,9 @@ The network scanner scans the specified subnet to find active devices. It listen
 python scanner.py <your_ip_address>
 ```
 
-Replace <your_ip_address> with the IP address of the machine running the scanner. For example:
+Replace <your_ip_address> with the IP address of the machine running the scanner. 
+
+Example:
 
 ```bash
 python scanner.py 192.168.1.95
@@ -55,3 +57,31 @@ python scanner.py 192.168.1.95
 By default, the scanner will scan the 192.168.1.0/24 subnet for active hosts. You can modify the subnet variable in the script to scan a different range.
 
 ### Deauthentication Attack
+
+Silkmoth also includes the capability to perform deauthentication attacks, which can disconnect a target from the Wi-Fi network.
+
+**Running the Deauth Tool**:
+To execute the deauthentication attack, use the following command:
+```bash
+python deauth.py <target_mac> <router_mac> [-i interface] [-p packet_count]
+```
+
+- **<target_mac>**: The MAC address of the device you want to disconnect (victim).
+- **<router_mac>**: The MAC address of the router (Wi-Fi access point).
+- **-i**: Network interface (default is wlan0mon).
+- **-p**: Number of deauth packets to send (default: 1000).
+
+Example:
+
+```bash
+python deauth.py AA:BB:CC:DD:EE:FF 11:22:33:44:55:66 -i wlan0mon -p 500
+```
+
+## Features
+
+- **Deauthentication Attack**: Includes functionality for conducting controlled deauthentication attacks in Wi-Fi environments, allowing security professionals to test the robustness of wireless networks. The tool crafts and sends deauth packets, targeting specific devices (clients) and routers to simulate disconnections and assess how vulnerable a network might be to such an attack.
+- **Active Host Discovery**: Efficiently scans a specified IP range (subnet) to identify live hosts by sending ICMP packets and processing their responses.
+- **Raw Socket Support**: Utilizes raw sockets to capture and analyze network packets, allowing for low-level access to network protocols.
+- **Protocol Analysis**: Supports analysis of multiple protocols, including ICMP, TCP, and potentially UDP, enabling comprehensive monitoring of network activity.
+- **Multithreading**: Implements multithreading to send UDP packets concurrently, improving efficiency and speed during the scanning process.
+- **User-Friendly Output**: Provides real-time output of detected hosts, including the IP address of active devices within the subnet, enhancing visibility into network status.

@@ -1,5 +1,7 @@
 # Silkmoth - Deauth Tool & Network Scanner
 
+![Silkmoth Sniffer's Logo](logo.jpg)
+
 **Silkmoth** is a lightweight network scanning and deauthentication tool designed for system administrators and security enthusiasts. This tool allows for the identification of active hosts on a network and facilitates the execution of Wi-Fi deauthentication attacks. It is ideal for performing network assessments, troubleshooting, and security auditing.
 
 ## Table of Contents

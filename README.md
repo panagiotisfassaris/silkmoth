@@ -85,3 +85,35 @@ python deauth.py AA:BB:CC:DD:EE:FF 11:22:33:44:55:66 -i wlan0mon -p 500
 - **Protocol Analysis**: Supports analysis of multiple protocols, including ICMP, TCP, and potentially UDP, enabling comprehensive monitoring of network activity.
 - **Multithreading**: Implements multithreading to send UDP packets concurrently, improving efficiency and speed during the scanning process.
 - **User-Friendly Output**: Provides real-time output of detected hosts, including the IP address of active devices within the subnet, enhancing visibility into network status.
+
+## Notes
+
+- For the deauth tool to work, your network interface must support monitor mode and it should be enabled (usually set to `wlan0mon`). You can use tools like `airmon-ng` to set your interface to monitor mode. 
+
+### Enabling Monitor Mode
+
+To enable monitor mode using `airmon-ng`, follow these steps:
+
+1. Open a terminal.
+2. Start `airmon-ng` to check your wireless interfaces:
+
+    ```bash
+    airmon-ng
+    ```
+
+3. Identify the wireless interface you want to set to monitor mode (e.g., `wlan0`).
+4. Enable monitor mode on that interface:
+
+    ```bash
+    sudo airmon-ng start wlan0
+    ```
+
+5. Your interface will typically be renamed to `wlan0mon`. You can verify this by running:
+
+    ```bash
+    airmon-ng
+    ```
+
+Once your interface is in monitor mode, you can use the deauthentication tool in Silkmoth.
+
+- On Windows, ensure that you are running the scripts with administrator privileges to access raw sockets.

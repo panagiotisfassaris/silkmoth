@@ -11,7 +11,6 @@
   - [Deauthentication Attack](#deauthentication-attack)
 - [Features](#features)
 - [Notes](#notes)
-- [Disclaimer](#disclaimer)
 
 ## About
 

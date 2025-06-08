@@ -2,81 +2,58 @@
 
 ![Silkmoth Sniffer's Logo](logo.jpg)
 
-**Silkmoth** is a lightweight network scanning and deauthentication tool designed for system administrators and security enthusiasts. This tool allows for the identification of active hosts on a network and facilitates the execution of Wi-Fi deauthentication attacks. It is ideal for performing network assessments, troubleshooting, and security auditing.
+**Silkmoth** is a lightweight Wi-Fi deauthentication tool built for system administrators and cybersecurity enthusiasts. It allows you to execute controlled deauth attacks to test the resilience of wireless networks. This is ideal for Wi-Fi security assessments, penetration testing, or educational purposes.
 
 ## Table of Contents
 
 - [About](#about)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Network Scanner](#network-scanner)
-  - [Deauthentication Attack](#deauthentication-attack)
 - [Features](#features)
 - [Notes](#notes)
+- [License](#license)
+
+---
 
 ## About
 
-**Silkmoth** offers two primary functionalities:
-1. **Network Scanner**: Silkmoth scans the specified subnet to identify active devices by sending ICMP packets and analyzing their responses.
-2. **Deauthentication Attack**: Sends deauthentication packets to a target Wi-Fi device, effectively disconnecting it from the network.
+**Silkmoth** provides one main capability:
+
+- **Deauthentication Attack**: Sends 802.11 deauthentication frames to forcibly disconnect a specific device (client) from a Wi-Fi access point. Useful for testing client reconnection behavior or simulating DoS in security labs.
+
+---
 
 ## Installation
 
-To install and run **Silkmoth**, follow these steps:
-
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/silkmoth.git
+    git clone https://github.com/panagiotisfassaris/silkmoth.git
     cd silkmoth
     ```
 
 2. **Install dependencies**:
-    Ensure you have Python 3.x installed on your system. The `scapy` library is required for deauthentication.
     ```bash
-    pip install -requirements
+    pip install -r requirements.txt
     ```
+
+    > Make sure `scapy` is installed. Run `pip install scapy` if needed.
+
+---
 
 ## Usage
 
-### Network Scanner
-
-The network scanner scans the specified subnet to find active devices. It listens for ICMP replies and identifies hosts that are up.
-
-**Running the Scanner**:
-```bash
-python scanner.py <your_ip_address>
-```
-
-Replace <your_ip_address> with the IP address of the machine running the scanner. 
-
-Example:
+> ⚠️ Requires root privileges and a Wi-Fi adapter that supports monitor mode.
 
 ```bash
-python scanner.py 192.168.1.95
+sudo python3 deauth.py <target_mac> <router_mac> [-i interface] [-p packet_count] [--auto-monitor]
 ```
 
-By default, the scanner will scan the 192.168.1.0/24 subnet for active hosts. You can modify the subnet variable in the script to scan a different range.
-
-### Deauthentication Attack
-
-Silkmoth also includes the capability to perform deauthentication attacks, which can disconnect a target from the Wi-Fi network.
-
-**Running the Deauth Tool**:
-To execute the deauthentication attack, use the following command:
-```bash
-python deauth.py <target_mac> <router_mac> [-i interface] [-p packet_count]
-```
-
-- **<target_mac>**: The MAC address of the device you want to disconnect (victim).
-- **<router_mac>**: The MAC address of the router (Wi-Fi access point).
-- **-i**: Network interface (default is wlan0mon).
-- **-p**: Number of deauth packets to send (default: 1000).
-
-Example:
-
-```bash
-python deauth.py AA:BB:CC:DD:EE:FF 11:22:33:44:55:66 -i wlan0mon -p 500
-```
+### Arguments
+- **<target_mac>**: MAC address of the victim device to disconnect.
+- **<router_mac>**: MAC address of the access point.
+- **-i, --interface**: Network interface to use (default: wlan0).
+- **-p, --packets**: Number of deauth packets to send (default: 1000).
+- **--auto-monitor**: Automatically switch the interface to monitor mode using native Linux commands (ip and iw).
 
 ## Features
 

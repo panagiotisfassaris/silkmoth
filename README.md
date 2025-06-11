@@ -1,4 +1,4 @@
-# Silkmoth - Deauth Tool & Network Scanner
+# Silkmoth - Wi-Fi Deauthorizer
 
 ![Silkmoth Sniffer's Logo](logo.jpg)
 
